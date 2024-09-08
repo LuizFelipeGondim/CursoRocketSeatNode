@@ -1,0 +1,3 @@
+Nesta formação de Node.js, exploraremos tópicos cruciais para o desenvolvimento robusto de aplicações back-end, do zero até o deploy. Iremos aprofundar seus conhecimentos em testes, abordando desde os fundamentos de testes unitários até os testes end-to-end.
+
+Ao longo do curso, vocês se familiarizarão com tecnologias como Fastify, desenvolvendo uma API de Check-ins em academias, NestJS e conceitos fundamentais como SOLID e DDD no desenvolvimento da API de um Fórum. Explorando padrões de design, como o Factory Pattern e o Repository Pattern, para estruturar seu código de maneira eficiente.
