@@ -1,27 +1,27 @@
-import fs from 'node:fs/promises';
+import fs from "node:fs/promises";
 
-const databasePath = new URL('../db.json', import.meta.url);
+const databasePath = new URL("../db.json", import.meta.url);
 
 export class Database {
-  #database = {} //O # eh utilizado para deixar a constante privada
+  #database = {};
 
   constructor() {
-    fs.readFile(databasePath, 'utf8')
+    fs.readFile(databasePath, "utf8")
       .then(data => {
         this.#database = JSON.parse(data);
       })
       .catch(() => {
         this.#persist();
-      })
+      });
   }
 
-  #persist(){
+  #persist() {
     fs.writeFile(databasePath, JSON.stringify(this.#database));
   }
 
   select(table, search) {
     let data = this.#database[table] ?? [];
-
+    
     if (search) {
       data = data.filter(row => {
         return Object.entries(search).some(([key, value]) => {
@@ -41,21 +41,13 @@ export class Database {
     }
 
     this.#persist();
-
-    return data;
   }
 
   update(table, id, data) {
     const rowIndex = this.#database[table].findIndex(row => row.id === id);
 
     if (rowIndex > -1) {
-      let element = this.#database[table][rowIndex];    
-      
-      Object.entries(data).forEach(([key, value]) => {
-        element[key] = value;
-      });
-      
-      this.#database[table][rowIndex] = element
+      this.#database[table][rowIndex] = { id, ...data };
       this.#persist();
     }
   }
